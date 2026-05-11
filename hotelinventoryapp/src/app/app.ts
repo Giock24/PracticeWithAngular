@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Rooms } from './rooms/rooms';
 
 // Il componente principale dell'app, che funge da root component
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
+  selector: 'hinv-root',
+  imports: [RouterOutlet, Rooms],
   templateUrl: './app.html',
   // Se vuoi usare un template inline invece di un file esterno, puoi decommentare questa riga e commentare la precedente
   // template: `Hello World from inline template! {{ title() }}
