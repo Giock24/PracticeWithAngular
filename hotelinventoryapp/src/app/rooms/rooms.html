@@ -1,1 +1,21 @@
-<h1>rooms works!</h1>
+<h1>Welcome to {{ hotelName }}</h1>
+<div [hidden]="hideRooms">
+    Number of rooms:
+    <div [innerText]="numberOfRooms"></div>
+    <!-- questo modo di scrivere è particolare di Angular -->
+    <!-- l'equivalente in Javascript è: -->
+    <!-- document.getElementById('elementId').innerText = numberOfRooms; -->
+</div>
+
+<button (click)="toggle()">Toggle Rooms</button>
+
+@if (rooms.avaibleRooms) {
+     <div>
+        Available Rooms: {{ rooms.avaibleRooms }}
+    </div>
+}
+@else {
+    <div>
+        No rooms data available
+    </div>
+}
