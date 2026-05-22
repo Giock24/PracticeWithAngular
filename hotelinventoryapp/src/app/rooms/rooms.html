@@ -10,9 +10,43 @@
 <button (click)="toggle()">Toggle Rooms</button>
 
 @if (rooms.avaibleRooms) {
-     <div>
+    <div>
         Available Rooms: {{ rooms.avaibleRooms }}
+        <div [style]="{
+            color: rooms.avaibleRooms > 0 ? 'green' : 'red',
+            fontWeight: 'bold'
+        }">
+            {{ rooms.avaibleRooms > 0 ? 'Rooms Available' : 'No Rooms Available' }}
+        </div>
     </div>
+    Rooms List:
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Room Amenities</th>
+            <th>Photos</th>
+            <th>Check-in Time</th>
+            <th>Check-out Time</th>
+        </tr>
+        @for (room of roomList; track $index; 
+            let e = $even; let o = $odd; let i = $index) {
+            <tr [class.even]="e" [class.odd]="o">
+                <td>{{ i }}</td>
+                <td>{{ e ? 'Even' : 'Odd' }}</td>
+                <td>{{ room.roomNumber }}</td>
+                <td>{{ room.roomType }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.amenities }}</td>
+                <td><img [src]="room.photos" [alt]="room.roomType" width="100" height="100"></td>
+                <td>{{ room.checkinTime}}</td>
+                <td>{{ room.checkoutTime}}</td>
+            </tr>
+        }
+    </table>
 }
 @else {
     <div>

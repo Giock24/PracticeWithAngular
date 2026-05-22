@@ -16,4 +16,6 @@ import { Rooms } from './rooms/rooms';
 })
 export class App {
   protected readonly title = signal('hotelinventoryapp');
+
+  role = 'user';
 }
