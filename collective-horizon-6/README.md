@@ -1,59 +1,122 @@
-# CollectiveHorizon6
+# 🚗 Collective Horizon 6
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Un'applicazione web per tenere traccia della tua collezione di auto in **Forza Horizon 6** — senza dover aprire il gioco.
+L'interfaccia è ispirata all'autosalone in-game, replicandone look and feel direttamente nel browser.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📖 Il Progetto
+
+Collective Horizon 6 nasce da un'esigenza semplice: poter controllare quali auto possiedi in Forza Horizon senza dover avviare il gioco ogni volta.
+
+Al di là dell'utilità pratica, questo progetto è anche una **sfida personale di apprendimento** — costruito per esplorare Angular, sperimentare un'architettura frontend moderna e capire fino a dove può arrivare lo sviluppo assistito dall'IA.
+
+> Pensato inizialmente per uso personale, ma con un'architettura predisposta per una futura apertura al pubblico.
+
+---
+
+## ✨ Funzionalità
+
+- 🔲 **Griglia visiva delle auto** — ordinate alfabeticamente da sinistra (A) a destra (Z) con scorrimento orizzontale
+- 🏷️ **Nome del modello** visualizzato sopra ogni immagine
+- 🔍 **Filtro per tipo di auto**
+- ✅ **Badge "già posseduta"** — indicatore visivo chiaro sulle auto che hai già
+- ⬛ **Bianco e nero** per le auto non ancora in collezione
+- ⚡ **Scorrimento a 60fps** tramite virtual scrolling (vengono renderizzate solo le card visibili)
+
+### 🔮 In Arrivo (Futuro)
+- 🔐 Autenticazione utente — ogni utente gestisce la propria collezione
+- 📱 Supporto PWA / mobile con layout responsive
+
+---
+
+## 🛠️ Stack Tecnologico
+
+| Livello | Tecnologia |
+|---|---|
+| Framework | Angular 18+ (Standalone Components) |
+| Linguaggio | TypeScript (strict mode) |
+| Stile | TailwindCSS |
+| State Management | Angular Signals |
+| Dati | JSON locale (MVP) → REST API (futuro) |
+| Performance | CDK Virtual Scrolling, OnPush change detection |
+
+---
+
+## 🗂️ Struttura del Progetto
+
+```
+src/
+├── app/
+│   ├── core/
+│   │   ├── models/          # Interfacce TypeScript (Car, CarType, ecc.)
+│   │   └── services/        # CarService, CollectionService
+│   ├── shared/
+│   │   └── components/      # CarCard, Badge, FilterBar
+│   ├── features/
+│   │   └── garage/          # Pagina principale con la griglia auto
+│   └── app.routes.ts
+├── assets/
+│   ├── images/cars/         # Immagini delle auto
+│   └── data/cars.json       # Datasource locale
+```
+
+---
+
+## 🚀 Come Iniziare
+
+### Prerequisiti
+
+- Node.js 18+
+- Angular CLI 18+
 
 ```bash
+npm install -g @angular/cli
+```
+
+### Installazione
+
+```bash
+# Clona il repository
+git clone https://github.com/tuo-username/collective-horizon-6.git
+cd collective-horizon-6
+
+# Installa le dipendenze
+npm install
+
+# Avvia il server di sviluppo
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Apri il browser su `http://localhost:4200`.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🗺️ Roadmap
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Fase | Stato | Descrizione |
+|---|---|---|
+| MVP | 🚧 In Corso | JSON locale, griglia auto, UI posseduta/non posseduta |
+| V1 | 📋 Pianificato | Filtri, UI fedele a FH6, ottimizzazione performance |
+| V2 | 💡 Futuro | Autenticazione, backend API, supporto PWA/mobile |
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## 🎯 KPI
 
-For end-to-end (e2e) testing, run:
+- Scorrimento fluido a **60fps** senza jank
+- Tempo di caricamento iniziale **< da definire**
+- UI approvata visivamente rispetto al riferimento FH6
+- Compatibile su **Windows, Linux e macOS**
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📄 Licenza
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Progetto a uso personale ed educativo. Non affiliato né approvato da Xbox Game Studios o Playground Games.
