@@ -1,8 +1,23 @@
 import { Component } from '@angular/core';
 import { IRooms, IRoomList } from './irooms';
+import { CurrencyPipe, 
+  DatePipe, 
+  JsonPipe, 
+  LowerCasePipe, 
+  PercentPipe,
+  SlicePipe,
+  DecimalPipe
+ } from '@angular/common';
 
 @Component({
   selector: 'hinv-rooms',
+  imports: [DatePipe, 
+    LowerCasePipe, 
+    CurrencyPipe, 
+    PercentPipe, 
+    DecimalPipe, 
+    SlicePipe
+  ],
   templateUrl: './rooms.html',
   styleUrl: './rooms.scss',
 })
@@ -25,7 +40,8 @@ export class Rooms {
       price: 150,
       photos: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80',
       checkinTime: new Date(),
-      checkoutTime: new Date()
+      checkoutTime: new Date(),
+      rating: 4.5
     },
     {
       roomNumber: 102,
@@ -34,7 +50,8 @@ export class Rooms {
       price: 100,
       photos: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
       checkinTime: new Date(),
-      checkoutTime: new Date()
+      checkoutTime: new Date(),
+      rating: 4.0
     },
     {
       roomNumber: 103,
@@ -43,7 +60,8 @@ export class Rooms {
       price: 300,
       photos: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80',
       checkinTime: new Date(),
-      checkoutTime: new Date()
+      checkoutTime: new Date(),
+      rating: 4.8
     },
     {
       roomNumber: 104,
@@ -52,7 +70,8 @@ export class Rooms {
       price: 60,
       photos: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
       checkinTime: new Date(),
-      checkoutTime: new Date()
+      checkoutTime: new Date(),
+      rating: 3.5
     }
   ];
 

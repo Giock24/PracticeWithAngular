@@ -12,4 +12,5 @@ export interface IRoomList {
     photos: string;
     checkinTime: Date;
     checkoutTime: Date;
+    rating?: number;
 }
