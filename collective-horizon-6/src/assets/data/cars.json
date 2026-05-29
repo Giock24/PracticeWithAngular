@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ferrari-f40",
+    "make": "Ferrari",
+    "model": "F40",
+    "year": 1992,
+    "type": "Classic Racers",
+    "imagePath": "assets/images/cars/ferrari-f40.webp",
+    "owned": true,
+    "rarity": "Legendary"
+  },
+  {
+    "id": "lamborghini-huracan",
+    "make": "Lamborghini",
+    "model": "Huracán LP 610-4",
+    "year": 2014,
+    "type": "Modern Sports Cars",
+    "imagePath": "assets/images/cars/lamborghini-huracan.webp",
+    "owned": false,
+    "rarity": "Rare"
+  },
+  {
+    "id": "ford-mustang-gt",
+    "make": "Ford",
+    "model": "Mustang GT",
+    "year": 2020,
+    "type": "Muscle Cars",
+    "imagePath": "assets/images/cars/ford-mustang-gt.webp",
+    "owned": true,
+    "rarity": "Common"
+  }
+]
