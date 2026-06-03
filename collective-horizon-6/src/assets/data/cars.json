@@ -15,7 +15,7 @@
     "model": "Huracán LP 610-4",
     "year": 2014,
     "type": "Modern Sports Cars",
-    "imagePath": "assets/images/cars/lamborghini-huracan.webp",
+    "imagePath": "assets/images/cars/lamborghini-huracan.png",
     "owned": false,
     "rarity": "Rare"
   },
@@ -25,7 +25,7 @@
     "model": "Mustang GT",
     "year": 2020,
     "type": "Muscle Cars",
-    "imagePath": "assets/images/cars/ford-mustang-gt.webp",
+    "imagePath": "assets/images/cars/ford-mustang-gt.png",
     "owned": true,
     "rarity": "Common"
   }
