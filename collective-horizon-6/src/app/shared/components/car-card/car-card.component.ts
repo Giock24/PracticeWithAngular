@@ -7,9 +7,7 @@ import { Car } from '../../../core/models/car.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <article class="card" [class.card--locked]="!car.owned" (click)="toggle.emit()">
-      @if (car.owned) {
-        <span class="card__badge">★ Posseduta</span>
-      }
+      <span class="card__badge" [class.card__badge--hidden]="!car.owned">★ Posseduta</span>
       <p class="card__model">{{ car.make }} {{ car.model }}</p>
       <img
         class="card__img"
@@ -38,6 +36,7 @@ import { Car } from '../../../core/models/car.model';
     .card__img { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 0.5rem; }
     .card__type { display: block; font-size: 0.75rem; color: #9ca3af; margin-top: 0.5rem; }
     .card__badge { font-size: 0.7rem; color: #fbbf24; font-weight: 700; }
+    .card__badge--hidden { visibility: hidden; }
 
     /* Auto NON posseduta → bianco e nero, come da analisi */
     .card--locked .card__img { filter: grayscale(100%) brightness(0.7); }
