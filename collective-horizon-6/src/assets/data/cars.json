@@ -5,7 +5,7 @@
     "model": "F40",
     "year": 1992,
     "type": "Classic Racers",
-    "imagePath": "assets/images/cars/ferrari-f40.webp",
+    "imagePath": "assets/images/cars/ferrari-f40.jpg",
     "owned": true,
     "rarity": "Legendary"
   },

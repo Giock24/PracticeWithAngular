@@ -1,0 +1,24 @@
+.garage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.garage__header { margin-bottom: 1rem; }
+.garage__title { font-size: 1.75rem; font-weight: 800; margin: 0; }
+.garage__counter { color: #9ca3af; margin: 0.25rem 0 0; }
+.garage__status { color: #9ca3af; margin-top: 2rem; }
+
+/* Il viewport orizzontale: occupa l'altezza restante */
+.garage__viewport {
+  flex: 1;
+  width: 100%;
+}
+
+/* CDK richiede questo per orientare il contenuto in orizzontale */
+.garage__viewport ::ng-deep .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { CarType } from '../../../core/models/car.model';
 
 @Component({
   selector: 'app-filter-bar',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './filter-bar.css',
 })
 export class FilterBar {
-
+  readonly types = input.required<CarType[]>();
+  readonly active = input<CarType | null>(null);
+  readonly filterChange = output<CarType | null>();
 }

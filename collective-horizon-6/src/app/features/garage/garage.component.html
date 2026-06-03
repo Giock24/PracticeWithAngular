@@ -1,0 +1,30 @@
+<div class="garage">
+  <header class="garage__header">
+    <h1 class="garage__title">Collective Horizon 6</h1>
+    <p class="garage__counter">{{ ownedCount() }} / {{ totalCars() }} auto possedute</p>
+  </header>
+
+  <app-filter-bar
+    [types]="availableTypes()"
+    [active]="activeFilter()"
+    (filterChange)="onFilterChange($event)"
+  />
+
+  @if (loading()) {
+    <p class="garage__status">Caricamento catalogo…</p>
+  } @else if (displayedCars().length === 0) {
+    <p class="garage__status">Nessuna auto trovata per questo filtro.</p>
+  } @else {
+    <cdk-virtual-scroll-viewport
+      orientation="horizontal"
+      [itemSize]="300"
+      class="garage__viewport"
+    >
+      <app-car-card
+        *cdkVirtualFor="let car of displayedCars(); trackBy: trackById"
+        [car]="car"
+        (toggle)="onToggleOwned(car.id)"
+      />
+    </cdk-virtual-scroll-viewport>
+  }
+</div>
