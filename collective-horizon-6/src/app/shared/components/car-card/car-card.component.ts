@@ -6,41 +6,119 @@ import { Car } from '../../../core/models/car.model';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <article class="card" [class.card--locked]="!car.owned" (click)="toggle.emit()">
-      <span class="card__badge" [class.card__badge--hidden]="!car.owned">★ Posseduta</span>
-      <p class="card__model">{{ car.make }} {{ car.model }}</p>
-      <img
-        class="card__img"
-        [src]="car.imagePath"
-        [alt]="car.make + ' ' + car.model"
-        loading="lazy"
-        width="260"
-        height="150"
-      />
-      <span class="card__type">{{ car.type }}</span>
-    </article>
+    <button
+      type="button"
+      class="card"
+      [class.is-locked]="!car.owned"
+      [attr.data-rarity]="car.rarity ?? 'Common'"
+      (click)="toggle.emit()"
+    >
+      <span class="card__inner">
+        <div class="card__media">
+          <img
+            class="card__img"
+            [src]="car.imagePath"
+            [alt]="car.make + ' ' + car.model"
+            loading="lazy"
+            width="300" height="180"
+          />
+          <span class="card__scrim"></span>
+
+          @if (car.owned) {
+            <span class="tag tag--owned">
+              <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+                <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              In garage
+            </span>
+          } @else {
+            <span class="tag tag--locked">
+              <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                <path d="M6 10V8a6 6 0 0112 0v2" fill="none" stroke="currentColor" stroke-width="2"/>
+                <rect x="4" y="10" width="16" height="10" rx="2" fill="currentColor"/>
+              </svg>
+              Da sbloccare
+            </span>
+          }
+
+          @if (car.rarity) {
+            <span class="tag tag--rarity">{{ car.rarity }}</span>
+          }
+        </div>
+
+        <div class="card__body">
+          <span class="card__make">{{ car.make }}</span>
+          <span class="card__model">{{ car.model }}</span>
+          <span class="card__type"><i class="dot"></i>{{ car.type }}</span>
+        </div>
+      </span>
+    </button>
   `,
   styles: [`
-    .card {
-      width: 280px;
-      margin: 0 0.5rem;
-      padding: 0.75rem;
-      border-radius: 0.75rem;
-      background: #1f2937;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: transform 0.15s ease;
-    }
-    .card:hover { transform: translateY(-4px); }
-    .card__model { font-weight: 700; margin: 0 0 0.5rem; color: #fff; }
-    .card__img { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 0.5rem; }
-    .card__type { display: block; font-size: 0.75rem; color: #9ca3af; margin-top: 0.5rem; }
-    .card__badge { font-size: 0.7rem; color: #fbbf24; font-weight: 700; }
-    .card__badge--hidden { visibility: hidden; }
+    :host { display: block; flex: 0 0 auto; width: 300px; height: 100%; padding: 10px 8px; }
 
-    /* Auto NON posseduta → bianco e nero, come da analisi */
-    .card--locked .card__img { filter: grayscale(100%) brightness(0.7); }
-    .card--locked .card__model { color: #9ca3af; }
+    .card {
+      position: relative;
+      width: 100%; height: 100%;
+      padding: 2px;                 /* spessore del bordo-gradiente */
+      border: 0; cursor: pointer;
+      background: var(--ch-line);   /* bloccata: bordo neutro */
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+      transition: transform .18s ease, filter .18s ease;
+    }
+    /* bordo-gradiente per le auto possedute, colorato per rarità */
+    .card:not(.is-locked)                      { background: var(--ch-grad); }
+    .card:not(.is-locked)[data-rarity="Rare"]      { background: linear-gradient(115deg,#5db4ff,#2563eb); }
+    .card:not(.is-locked)[data-rarity="Epic"]      { background: linear-gradient(115deg,#c084fc,#7c3aed); }
+    .card:not(.is-locked)[data-rarity="Legendary"] { background: linear-gradient(115deg,#ffd35e,#ff8a1e); }
+    .card:not(.is-locked)[data-rarity="Forza Edition"] { background: linear-gradient(115deg,#2dd47e,#1e9e8a); }
+
+    .card:hover { transform: translateY(-6px); filter: drop-shadow(0 14px 26px rgba(255,90,60,.35)); }
+    .card.is-locked:hover { filter: drop-shadow(0 12px 22px rgba(0,0,0,.55)); }
+
+    .card__inner {
+      display: flex; flex-direction: column;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--ch-panel);
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    }
+
+    .card__media { position: relative; flex: 1 1 60%; overflow: hidden; }
+    .card__img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .card:hover .card__img { transform: scale(1.06); }
+    .card__scrim { position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,12,18,.95) 2%, rgba(10,12,18,0) 46%); }
+
+    /* bloccata → bianco e nero, come da analisi */
+    .card.is-locked .card__img { filter: grayscale(100%) brightness(.55) contrast(.9); }
+    .card.is-locked .card__model { color: var(--ch-muted); }
+
+    .tag {
+      position: absolute; top: 10px;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 9px;
+      font: 700 11px/1 'Saira Condensed', sans-serif;
+      letter-spacing: .5px; text-transform: uppercase;
+      clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    }
+    .tag--owned  { left: 10px; background: var(--ch-grad); color: #1a0d06; }
+    .tag--locked { left: 10px; background: rgba(10,12,18,.78); color: var(--ch-muted); }
+    .tag--rarity { right: 10px; background: rgba(10,12,18,.82); color: #fff; clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%); }
+    .card[data-rarity="Common"]    .tag--rarity { color: var(--rar-common); }
+    .card[data-rarity="Rare"]      .tag--rarity { color: var(--rar-rare); }
+    .card[data-rarity="Epic"]      .tag--rarity { color: var(--rar-epic); }
+    .card[data-rarity="Legendary"] .tag--rarity { color: var(--rar-legendary); }
+    .card[data-rarity="Forza Edition"] .tag--rarity { color: var(--rar-forza); }
+
+    .card__body { flex: 0 0 auto; padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 2px; text-align: left; }
+    .card__make  { font: 600 11px/1 'Saira', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ch-muted); }
+    .card__model { font: 800 21px/1.05 'Saira Condensed', sans-serif; text-transform: uppercase; letter-spacing: .3px; color: var(--ch-text); }
+    .card__type  { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px;
+      font: 500 12px/1 'Saira', sans-serif; color: var(--ch-muted); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ch-grad); flex: 0 0 auto; }
   `],
 })
 export class CarCardComponent {

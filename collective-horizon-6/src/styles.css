@@ -1,1 +1,38 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ch-bg:        #0a0c12;
+  --ch-bg-2:      #111521;
+  --ch-panel:     #161b29;
+  --ch-text:      #f4f6fb;
+  --ch-muted:     #8a93a8;
+  --ch-line:      #2a3142;
+
+  --ch-accent-1:  #ff2e7e;   /* pink */
+  --ch-accent-2:  #ff8a1e;   /* arancio */
+  --ch-grad:      linear-gradient(115deg, var(--ch-accent-1), var(--ch-accent-2));
+
+  --rar-common:    #9aa3b5;
+  --rar-rare:      #5db4ff;
+  --rar-epic:      #c084fc;
+  --rar-legendary: #ffd35e;
+  --rar-forza:     #2dd47e;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ch-text);
+  font-family: 'Saira', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1100px 600px at 82% -12%, rgba(255,46,126,.13), transparent 60%),
+    radial-gradient(900px 520px at -8% 112%, rgba(255,138,30,.11), transparent 55%),
+    linear-gradient(160deg, var(--ch-bg-2), var(--ch-bg));
+  background-attachment: fixed;
+}

@@ -8,32 +8,39 @@ import { CarType } from '../../../core/models/car.model';
   template: `
     <nav class="filters">
       <button
-        class="filters__btn"
-        [class.filters__btn--active]="active === null"
+        type="button"
+        class="chip"
+        [class.is-active]="active === null"
         (click)="filterChange.emit(null)"
       >Tutte</button>
 
       @for (type of types; track type) {
         <button
-          class="filters__btn"
-          [class.filters__btn--active]="active === type"
+          type="button"
+          class="chip"
+          [class.is-active]="active === type"
           (click)="filterChange.emit(type)"
         >{{ type }}</button>
       }
     </nav>
   `,
   styles: [`
-    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .filters__btn {
-      padding: 0.4rem 0.9rem;
-      border: 1px solid #374151;
-      border-radius: 999px;
-      background: transparent;
-      color: #d1d5db;
+    :host { display: block; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 8px 16px;
+      border: 0;
       cursor: pointer;
-      font-size: 0.85rem;
+      color: var(--ch-muted);
+      background: var(--ch-panel);
+      font: 700 12.5px/1 'Saira Condensed', sans-serif;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      transition: color .15s ease, transform .15s ease, background .15s ease;
     }
-    .filters__btn--active { background: #fbbf24; color: #111; border-color: #fbbf24; }
+    .chip:hover { color: var(--ch-text); transform: translateY(-2px); }
+    .chip.is-active { background: var(--ch-grad); color: #1a0d06; }
   `],
 })
 export class FilterBarComponent {

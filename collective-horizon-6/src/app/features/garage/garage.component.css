@@ -1,24 +1,33 @@
-.garage {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 1.5rem;
-  box-sizing: border-box;
+.garage { display: flex; flex-direction: column; height: 100vh; padding: 28px 28px 18px; }
+
+.hero { margin-bottom: 18px; }
+.hero__eyebrow {
+  margin: 0; font: 700 12px/1 'Saira Condensed', sans-serif;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: transparent; background: var(--ch-grad);
+  -webkit-background-clip: text; background-clip: text;
 }
-
-.garage__header { margin-bottom: 1rem; }
-.garage__title { font-size: 1.75rem; font-weight: 800; margin: 0; }
-.garage__counter { color: #9ca3af; margin: 0.25rem 0 0; }
-.garage__status { color: #9ca3af; margin-top: 2rem; }
-
-/* Il viewport orizzontale: occupa l'altezza restante */
-.garage__viewport {
-  flex: 1;
-  width: 100%;
+.hero__title {
+  margin: 6px 0 0; font: 800 clamp(30px,4.5vw,52px)/0.95 'Saira Condensed', sans-serif;
+  text-transform: uppercase; letter-spacing: .5px;
 }
+.hero__accent { color: transparent; background: var(--ch-grad); -webkit-background-clip: text; background-clip: text; }
 
-/* CDK richiede questo per orientare il contenuto in orizzontale */
+.hero__stats { display: flex; align-items: center; gap: 22px; margin-top: 16px; flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; }
+.stat__num { font: 800 26px/1 'Saira Condensed', sans-serif; }
+.stat__den { color: var(--ch-muted); font-weight: 600; font-size: 16px; margin-left: 6px; }
+.stat__label { margin-top: 4px; font: 500 11px/1 'Saira', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ch-muted); }
+
+.progress { position: relative; flex: 1 1 220px; max-width: 420px; height: 14px;
+  background: var(--ch-panel); border-radius: 999px; overflow: hidden; }
+.progress__fill { height: 100%; background: var(--ch-grad); border-radius: 999px; transition: width .5s ease; }
+.progress__pct { position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  font: 700 10px/1 'Saira Condensed', sans-serif; letter-spacing: .5px; }
+
+.garage__viewport { flex: 1; width: 100%; margin-top: 12px; }
 .garage__viewport ::ng-deep .cdk-virtual-scroll-content-wrapper {
-  display: flex;
-  flex-direction: row;
+  display: flex; flex-direction: row; align-items: stretch;
 }
+
+.garage__status { margin-top: 2rem; color: var(--ch-muted); font-family: 'Saira', sans-serif; }

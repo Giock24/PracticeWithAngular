@@ -4,38 +4,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Panoramica del Progetto
 
-Questo workspace contiene due progetti distinti:
+Questo workspace contiene tre progetti distinti:
 
 - **`hotelinventoryapp/`** — App Angular 21 principale per la gestione di un inventario hotel, con SSR abilitato.
+- **`collective-horizon-6/`** — App Angular 21 per tracciare la collezione auto di Forza Horizon 6, con SSR e CDK virtual scroll. Vedi `collective-horizon-6/CLAUDE.md` per i dettagli.
 - **`TypescriptDemo/`** — Progetto autonomo di esercitazione TypeScript (non collegato all'app Angular).
 
 ---
 
-## Comandi principali (da eseguire dentro `hotelinventoryapp/`)
+## Comandi principali
+
+### `hotelinventoryapp/`
 
 ```bash
-npm start          # Avvia il dev server su http://localhost:4200/
-ng build           # Build di produzione
-ng test            # Esegue i test con Vitest
-node dist/hotelinventoryapp/server/server.mjs  # Serve il build SSR
+npm start                                        # Dev server → http://localhost:4200
+ng build                                         # Build di produzione
+ng test                                          # Esegue i test con Vitest
+npx vitest run src/app/rooms/rooms.spec.ts       # Singolo file di test
+node dist/hotelinventoryapp/server/server.mjs    # Serve il build SSR
 ```
 
-Per eseguire un singolo test file:
+### `collective-horizon-6/`
+
 ```bash
-npx vitest run src/app/rooms/rooms.spec.ts
+npm start                                               # Dev server → http://localhost:4200
+ng build                                                # Build di produzione
+ng test                                                 # Esegue i test con Vitest
+node dist/collective-horizon-6/server/server.mjs        # Serve il build SSR
 ```
 
 ---
 
-## Architettura
+## Architettura — `hotelinventoryapp`
 
 ### Pattern: Standalone Components (senza NgModule)
 
-L'app usa esclusivamente **standalone components** (Angular 14+). Non esistono `NgModule`. Il bootstrap avviene tramite `bootstrapApplication()` in `main.ts`, con la configurazione centralizzata in `app.config.ts` (providers per router, hydration, error handling).
+L'app usa esclusivamente **standalone components** (Angular 14+). Il bootstrap avviene tramite `bootstrapApplication()` in `main.ts`, con la configurazione centralizzata in `app.config.ts` (providers per router, hydration, error handling).
 
 ### Server-Side Rendering (SSR)
 
-L'app è configurata per SSR con Express 5:
+Configurata con Express 5:
 - `main.server.ts` — bootstrap lato server
 - `src/server.ts` — server Express (porta 4000 in produzione)
 - `app.config.server.ts` — provider aggiuntivi lato server

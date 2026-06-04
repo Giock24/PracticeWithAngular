@@ -1,7 +1,18 @@
 <div class="garage">
-  <header class="garage__header">
-    <h1 class="garage__title">Collective Horizon 6</h1>
-    <p class="garage__counter">{{ ownedCount() }} / {{ totalCars() }} auto possedute</p>
+  <header class="hero">
+    <p class="hero__eyebrow">Festival Garage</p>
+    <h1 class="hero__title">Collective Horizon <span class="hero__accent">6</span></h1>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <span class="stat__num">{{ ownedCount() }}<span class="stat__den">/ {{ totalCars() }}</span></span>
+        <span class="stat__label">auto in garage</span>
+      </div>
+      <div class="progress" role="progressbar" [attr.aria-valuenow]="completion()">
+        <div class="progress__fill" [style.width.%]="completion()"></div>
+        <span class="progress__pct">{{ completion() }}%</span>
+      </div>
+    </div>
   </header>
 
   <app-filter-bar
@@ -17,7 +28,7 @@
   } @else {
     <cdk-virtual-scroll-viewport
       orientation="horizontal"
-      [itemSize]="300"
+      [itemSize]="316"
       class="garage__viewport"
     >
       <app-car-card

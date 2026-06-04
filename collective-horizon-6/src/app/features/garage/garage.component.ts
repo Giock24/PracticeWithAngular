@@ -46,6 +46,9 @@ export class GarageComponent implements OnInit {
 
   // Totale auto possedute sul totale catalogo (per l'header)
   readonly totalCars = computed(() => this.carService.cars().length);
+  readonly completion = computed(() =>
+    this.totalCars() ? Math.round((this.ownedCount() / this.totalCars()) * 100) : 0
+  );
 
   ngOnInit(): void {
     this.carService.loadCars().subscribe((cars) => {
