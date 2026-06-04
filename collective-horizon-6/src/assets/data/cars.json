@@ -9,6 +9,9 @@
     "owned": true,
     "rarity": "Legendary"
   },
+  { "id": "porsche-959", "make": "Porsche", "model": "959", "year": 1987, "type": "Classic Racers", "imagePath": "assets/images/cars/porsche-959.webp", "owned": false, "rarity": "Epic" },
+  { "id": "ferrari-f50", "make": "Ferrari", "model": "F50", "year": 1995, "type": "Classic Racers", "imagePath": "assets/images/cars/ferrari-f50.webp", "owned": false, "rarity": "Legendary" },
+
   {
     "id": "lamborghini-huracan",
     "make": "Lamborghini",
@@ -19,6 +22,16 @@
     "owned": false,
     "rarity": "Rare"
   },
+  { "id": "porsche-911-gt3", "make": "Porsche", "model": "911 GT3", "year": 2018, "type": "Modern Sports Cars", "imagePath": "assets/images/cars/porsche-911-gt3.webp", "owned": true, "rarity": "Epic" },
+  { "id": "toyota-gr-supra", "make": "Toyota", "model": "GR Supra", "year": 2020, "type": "Modern Sports Cars", "imagePath": "assets/images/cars/toyota-gr-supra.webp", "owned": true, "rarity": "Common" },
+  { "id": "nissan-gtr", "make": "Nissan", "model": "GT-R", "year": 2017, "type": "Modern Sports Cars", "imagePath": "assets/images/cars/nissan-gtr.webp", "owned": false, "rarity": "Rare" },
+  { "id": "bmw-m2-competition", "make": "BMW", "model": "M2 Competition", "year": 2019, "type": "Modern Sports Cars", "imagePath": "assets/images/cars/bmw-m2-competition.webp", "owned": false, "rarity": "Common" },
+
+  { "id": "bugatti-chiron", "make": "Bugatti", "model": "Chiron", "year": 2018, "type": "Hypercars", "imagePath": "assets/images/cars/bugatti-chiron.webp", "owned": false, "rarity": "Legendary" },
+  { "id": "koenigsegg-jesko", "make": "Koenigsegg", "model": "Jesko", "year": 2020, "type": "Hypercars", "imagePath": "assets/images/cars/koenigsegg-jesko.webp", "owned": false, "rarity": "Legendary" },
+  { "id": "mclaren-p1", "make": "McLaren", "model": "P1", "year": 2013, "type": "Hypercars", "imagePath": "assets/images/cars/mclaren-p1.webp", "owned": true, "rarity": "Epic" },
+  { "id": "ferrari-laferrari", "make": "Ferrari", "model": "LaFerrari", "year": 2013, "type": "Hypercars", "imagePath": "assets/images/cars/ferrari-laferrari.webp", "owned": false, "rarity": "Forza Edition" },
+
   {
     "id": "ford-mustang-gt",
     "make": "Ford",
@@ -28,5 +41,35 @@
     "imagePath": "assets/images/cars/ford-mustang-gt.png",
     "owned": true,
     "rarity": "Common"
-  }
+  },
+  { "id": "dodge-charger-rt-1969", "make": "Dodge", "model": "Charger R/T", "year": 1969, "type": "Muscle Cars", "imagePath": "assets/images/cars/dodge-charger-rt-1969.webp", "owned": false, "rarity": "Rare" },
+  { "id": "chevrolet-camaro-z28-1969", "make": "Chevrolet", "model": "Camaro Z/28", "year": 1969, "type": "Muscle Cars", "imagePath": "assets/images/cars/chevrolet-camaro-z28-1969.webp", "owned": false, "rarity": "Rare" },
+  { "id": "dodge-challenger-hellcat", "make": "Dodge", "model": "Challenger SRT Hellcat", "year": 2015, "type": "Muscle Cars", "imagePath": "assets/images/cars/dodge-challenger-hellcat.webp", "owned": true, "rarity": "Common" },
+
+  { "id": "aston-martin-db11", "make": "Aston Martin", "model": "DB11", "year": 2017, "type": "GT Cars", "imagePath": "assets/images/cars/aston-martin-db11.webp", "owned": false, "rarity": "Rare" },
+  { "id": "mercedes-amg-gt-r", "make": "Mercedes-AMG", "model": "GT R", "year": 2017, "type": "GT Cars", "imagePath": "assets/images/cars/mercedes-amg-gt-r.webp", "owned": true, "rarity": "Epic" },
+  { "id": "jaguar-f-type-r", "make": "Jaguar", "model": "F-Type R", "year": 2015, "type": "GT Cars", "imagePath": "assets/images/cars/jaguar-f-type-r.webp", "owned": false, "rarity": "Common" },
+
+  { "id": "mazda-rx7-1997", "make": "Mazda", "model": "RX-7", "year": 1997, "type": "Retro Sports Cars", "imagePath": "assets/images/cars/mazda-rx7-1997.webp", "owned": true, "rarity": "Rare" },
+  { "id": "nissan-skyline-r34", "make": "Nissan", "model": "Skyline GT-R V-Spec", "year": 1999, "type": "Retro Sports Cars", "imagePath": "assets/images/cars/nissan-skyline-r34.webp", "owned": false, "rarity": "Epic" },
+  { "id": "honda-nsx-1997", "make": "Honda", "model": "NSX Type R", "year": 1997, "type": "Retro Sports Cars", "imagePath": "assets/images/cars/honda-nsx-1997.webp", "owned": false, "rarity": "Rare" },
+
+  { "id": "bmw-m5-2018", "make": "BMW", "model": "M5", "year": 2018, "type": "Super Saloons", "imagePath": "assets/images/cars/bmw-m5-2018.webp", "owned": false, "rarity": "Common" },
+  { "id": "audi-rs6-avant", "make": "Audi", "model": "RS 6 Avant", "year": 2020, "type": "Super Saloons", "imagePath": "assets/images/cars/audi-rs6-avant.webp", "owned": true, "rarity": "Rare" },
+
+  { "id": "ariel-atom-2018", "make": "Ariel", "model": "Atom 3.5R", "year": 2018, "type": "Extreme Track Toys", "imagePath": "assets/images/cars/ariel-atom-2018.webp", "owned": false, "rarity": "Common" },
+  { "id": "ktm-x-bow-r", "make": "KTM", "model": "X-Bow R", "year": 2013, "type": "Extreme Track Toys", "imagePath": "assets/images/cars/ktm-x-bow-r.webp", "owned": false, "rarity": "Rare" },
+
+  { "id": "ferrari-250-gto", "make": "Ferrari", "model": "250 GTO", "year": 1962, "type": "Vintage Racers", "imagePath": "assets/images/cars/ferrari-250-gto.webp", "owned": false, "rarity": "Legendary" },
+  { "id": "jaguar-d-type", "make": "Jaguar", "model": "D-Type", "year": 1956, "type": "Vintage Racers", "imagePath": "assets/images/cars/jaguar-d-type.webp", "owned": false, "rarity": "Epic" },
+
+  { "id": "ford-f150-raptor", "make": "Ford", "model": "F-150 Raptor", "year": 2017, "type": "Trucks & 4x4s", "imagePath": "assets/images/cars/ford-f150-raptor.webp", "owned": true, "rarity": "Common" },
+  { "id": "jeep-wrangler-rubicon", "make": "Jeep", "model": "Wrangler Rubicon", "year": 2017, "type": "Trucks & 4x4s", "imagePath": "assets/images/cars/jeep-wrangler-rubicon.webp", "owned": false, "rarity": "Common" },
+
+  { "id": "penhall-cholla", "make": "Penhall", "model": "The Cholla", "year": 2014, "type": "Buggies & Off-Road", "imagePath": "assets/images/cars/penhall-cholla.webp", "owned": false, "rarity": "Rare" },
+
+  { "id": "vw-type2-bus", "make": "Volkswagen", "model": "Type 2 De Luxe", "year": 1963, "type": "Vans & Utility", "imagePath": "assets/images/cars/vw-type2-bus.webp", "owned": false, "rarity": "Common" },
+
+  { "id": "jaguar-e-type", "make": "Jaguar", "model": "E-Type", "year": 1961, "type": "Rare Classics", "imagePath": "assets/images/cars/jaguar-e-type.webp", "owned": false, "rarity": "Epic" },
+  { "id": "lancia-stratos-hf", "make": "Lancia", "model": "Stratos HF", "year": 1974, "type": "Rare Classics", "imagePath": "assets/images/cars/lancia-stratos-hf.webp", "owned": true, "rarity": "Forza Edition" }
 ]

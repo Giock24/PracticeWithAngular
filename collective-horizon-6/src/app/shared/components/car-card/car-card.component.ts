@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, signal } from '@angular/core';
 import { Car } from '../../../core/models/car.model';
 
 @Component({
@@ -10,8 +10,9 @@ import { Car } from '../../../core/models/car.model';
       type="button"
       class="card"
       [class.is-locked]="!car.owned"
+      [class.is-unlocking]="justUnlocked()"
       [attr.data-rarity]="car.rarity ?? 'Common'"
-      (click)="toggle.emit()"
+      (click)="onClick()"
     >
       <span class="card__inner">
         <div class="card__media">
@@ -45,6 +46,9 @@ import { Car } from '../../../core/models/car.model';
           @if (car.rarity) {
             <span class="tag tag--rarity">{{ car.rarity }}</span>
           }
+
+          <!-- overlay del flash di sblocco -->
+          <span class="card__flash" (animationend)="justUnlocked.set(false)"></span>
         </div>
 
         <div class="card__body">
@@ -61,14 +65,13 @@ import { Car } from '../../../core/models/car.model';
     .card {
       position: relative;
       width: 100%; height: 100%;
-      padding: 2px;                 /* spessore del bordo-gradiente */
+      padding: 2px;
       border: 0; cursor: pointer;
-      background: var(--ch-line);   /* bloccata: bordo neutro */
+      background: var(--ch-line);
       clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
       filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
       transition: transform .18s ease, filter .18s ease;
     }
-    /* bordo-gradiente per le auto possedute, colorato per rarità */
     .card:not(.is-locked)                      { background: var(--ch-grad); }
     .card:not(.is-locked)[data-rarity="Rare"]      { background: linear-gradient(115deg,#5db4ff,#2563eb); }
     .card:not(.is-locked)[data-rarity="Epic"]      { background: linear-gradient(115deg,#c084fc,#7c3aed); }
@@ -87,14 +90,36 @@ import { Car } from '../../../core/models/car.model';
     }
 
     .card__media { position: relative; flex: 1 1 60%; overflow: hidden; }
-    .card__img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    /* la transition sul filter fa il fade grigio → colore allo sblocco */
+    .card__img { display: block; width: 100%; height: 100%; object-fit: cover;
+      transition: transform .35s ease, filter .5s ease; }
     .card:hover .card__img { transform: scale(1.06); }
     .card__scrim { position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(10,12,18,.95) 2%, rgba(10,12,18,0) 46%); }
 
-    /* bloccata → bianco e nero, come da analisi */
     .card.is-locked .card__img { filter: grayscale(100%) brightness(.55) contrast(.9); }
     .card.is-locked .card__model { color: var(--ch-muted); }
+
+    /* --- flash di sblocco --- */
+    .card__flash {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      mix-blend-mode: screen;
+      background: radial-gradient(circle at 50% 42%,
+        rgba(255,255,255,.95) 0%, rgba(255,138,30,.55) 38%, rgba(255,46,126,0) 70%);
+    }
+    .card.is-unlocking .card__flash { animation: ch-flash .6s ease-out; }
+    .card.is-unlocking .card__inner { animation: ch-pop .55s ease; }
+
+    @keyframes ch-flash {
+      0%   { opacity: 0; }
+      18%  { opacity: .9; }
+      100% { opacity: 0; }
+    }
+    @keyframes ch-pop {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.045); }
+      100% { transform: scale(1); }
+    }
 
     .tag {
       position: absolute; top: 10px;
@@ -106,7 +131,7 @@ import { Car } from '../../../core/models/car.model';
     }
     .tag--owned  { left: 10px; background: var(--ch-grad); color: #1a0d06; }
     .tag--locked { left: 10px; background: rgba(10,12,18,.78); color: var(--ch-muted); }
-    .tag--rarity { right: 10px; background: rgba(10,12,18,.82); color: #fff; clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%); }
+    .tag--rarity { right: 10px; background: rgba(10,12,18,.82); color: #fff; }
     .card[data-rarity="Common"]    .tag--rarity { color: var(--rar-common); }
     .card[data-rarity="Rare"]      .tag--rarity { color: var(--rar-rare); }
     .card[data-rarity="Epic"]      .tag--rarity { color: var(--rar-epic); }
@@ -119,9 +144,22 @@ import { Car } from '../../../core/models/car.model';
     .card__type  { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px;
       font: 500 12px/1 'Saira', sans-serif; color: var(--ch-muted); }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ch-grad); flex: 0 0 auto; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .card__img, .card__inner, .card__flash { transition: none; animation: none; }
+    }
   `],
 })
 export class CarCardComponent {
   @Input({ required: true }) car!: Car;
   @Output() toggle = new EventEmitter<void>();
+
+  readonly justUnlocked = signal(false);
+
+  onClick(): void {
+    if (!this.car.owned) {
+      this.justUnlocked.set(true); // sto per sbloccarla → flash
+    }
+    this.toggle.emit();
+  }
 }
