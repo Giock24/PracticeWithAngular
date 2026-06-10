@@ -60,7 +60,7 @@ import { Car } from '../../../core/models/car.model';
     </button>
   `,
   styles: [`
-    :host { display: block; flex: 0 0 auto; width: 300px; height: 100%; padding: 10px 8px; }
+    :host { display: block; width: 300px; height: 100%; padding: 10px 8px; }
 
     .card {
       position: relative;

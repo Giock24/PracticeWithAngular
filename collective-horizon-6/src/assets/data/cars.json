@@ -9,7 +9,7 @@
     "owned": true,
     "rarity": "Legendary"
   },
-  { "id": "porsche-959", "make": "Porsche", "model": "959", "year": 1987, "type": "Classic Racers", "imagePath": "assets/images/cars/porsche-959.webp", "owned": false, "rarity": "Epic" },
+  { "id": "porsche-959", "make": "Porsche", "model": "959", "year": 1987, "type": "Classic Racers", "imagePath": "assets/images/cars/porsche-959.jpg", "owned": false, "rarity": "Epic" },
   { "id": "ferrari-f50", "make": "Ferrari", "model": "F50", "year": 1995, "type": "Classic Racers", "imagePath": "assets/images/cars/ferrari-f50.webp", "owned": false, "rarity": "Legendary" },
 
   {

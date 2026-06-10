@@ -26,16 +26,10 @@
   } @else if (displayedCars().length === 0) {
     <p class="garage__status">Nessuna auto trovata per questo filtro.</p>
   } @else {
-    <cdk-virtual-scroll-viewport
-      orientation="horizontal"
-      [itemSize]="316"
-      class="garage__viewport"
-    >
-      <app-car-card
-        *cdkVirtualFor="let car of displayedCars(); trackBy: trackById"
-        [car]="car"
-        (toggle)="onToggleOwned(car.id)"
-      />
-    </cdk-virtual-scroll-viewport>
+    <div #gridContainer class="garage__grid" [style.--row-count]="rowCount()">
+      @for (car of displayedCars(); track car.id) {
+        <app-car-card [car]="car" (toggle)="onToggleOwned(car.id)" />
+      }
+    </div>
   }
 </div>

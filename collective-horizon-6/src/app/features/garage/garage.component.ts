@@ -1,30 +1,46 @@
-import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { Component, OnInit, OnDestroy, inject, signal, computed, ChangeDetectionStrategy, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { CarService } from '../../core/services/car.service';
 import { CollectionService } from '../../core/services/collection.service';
 import { Car, CarType } from '../../core/models/car.model';
 import { CarCardComponent } from '../../shared/components/car-card/car-card.component';
 import { FilterBarComponent } from '../../shared/components/filter-bar/filter-bar.component';
 
+const CARD_HEIGHT = 280;
+
 @Component({
   selector: 'app-garage',
   standalone: true,
-  imports: [ScrollingModule, CarCardComponent, FilterBarComponent],
+  imports: [CarCardComponent, FilterBarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './garage.component.html',
   styleUrl: './garage.component.css',
 })
-export class GarageComponent implements OnInit {
+export class GarageComponent implements OnInit, OnDestroy {
   private readonly carService = inject(CarService);
   private readonly collection = inject(CollectionService);
+  private readonly ngZone = inject(NgZone);
 
-  // Filtro attivo: null = "Tutte"
+  private _resizeObserver?: ResizeObserver;
+  private readonly _gridHeight = signal(0);
+
+  @ViewChild('gridContainer') set gridContainerRef(el: ElementRef<HTMLElement> | undefined) {
+    this._resizeObserver?.disconnect();
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    this._resizeObserver = new ResizeObserver(entries => {
+      const h = entries[0]?.contentRect.height ?? 0;
+      this.ngZone.run(() => this._gridHeight.set(h));
+    });
+    this._resizeObserver.observe(el.nativeElement);
+  }
+
   readonly activeFilter = signal<CarType | null>(null);
-
   readonly loading = this.carService.loading;
   readonly ownedCount = this.collection.ownedCount;
 
-  // Tipi unici presenti nel catalogo, per popolare la filter bar
+  readonly rowCount = computed(() =>
+    Math.min(3, Math.max(1, Math.floor(this._gridHeight() / CARD_HEIGHT)))
+  );
+
   readonly availableTypes = computed<CarType[]>(() => {
     const types = new Set(this.carService.cars().map((c) => c.type));
     return [...types].sort();
@@ -38,13 +54,12 @@ export class GarageComponent implements OnInit {
 
     return this.carService.cars()
       .filter((c) => !filter || c.type === filter)
-      .map((c) => ({ ...c, owned: ownedIds.has(c.id) })) // possessione live
+      .map((c) => ({ ...c, owned: ownedIds.has(c.id) }))
       .sort((a, b) =>
         `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
       );
   });
 
-  // Totale auto possedute sul totale catalogo (per l'header)
   readonly totalCars = computed(() => this.carService.cars().length);
   readonly completion = computed(() =>
     this.totalCars() ? Math.round((this.ownedCount() / this.totalCars()) * 100) : 0
@@ -52,8 +67,12 @@ export class GarageComponent implements OnInit {
 
   ngOnInit(): void {
     this.carService.loadCars().subscribe((cars) => {
-      this.collection.seedFromCatalog(cars); // seed solo alla prima apertura
+      this.collection.seedFromCatalog(cars);
     });
+  }
+
+  ngOnDestroy(): void {
+    this._resizeObserver?.disconnect();
   }
 
   onFilterChange(type: CarType | null): void {
@@ -62,9 +81,5 @@ export class GarageComponent implements OnInit {
 
   onToggleOwned(id: string): void {
     this.collection.toggleOwned(id);
-  }
-
-  trackById(_: number, car: Car): string {
-    return car.id;
   }
 }

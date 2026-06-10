@@ -25,9 +25,19 @@
 .progress__pct { position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
   font: 700 10px/1 'Saira Condensed', sans-serif; letter-spacing: .5px; }
 
-.garage__viewport { flex: 1; width: 100%; margin-top: 12px; }
-.garage__viewport ::ng-deep .cdk-virtual-scroll-content-wrapper {
-  display: flex; flex-direction: row; align-items: stretch;
+.garage__grid {
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(var(--row-count, 1), 280px);
+  grid-auto-flow: column;
+  grid-auto-columns: 316px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-top: 12px;
+  align-content: start;
 }
+.garage__grid::-webkit-scrollbar { height: 6px; }
+.garage__grid::-webkit-scrollbar-track { background: var(--ch-panel); }
+.garage__grid::-webkit-scrollbar-thumb { background: var(--ch-line); border-radius: 3px; }
 
 .garage__status { margin-top: 2rem; color: var(--ch-muted); font-family: 'Saira', sans-serif; }
